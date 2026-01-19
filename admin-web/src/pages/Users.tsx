@@ -43,7 +43,11 @@ const Users: React.FC = () => {
   };
 
   const filteredUsers = users.filter((u) => {
-    if (!searchTerm) return true; // Không tìm thì hiện hết
+    // Chỉ hiện user có role là "user" hoặc không có role (mặc định là user)
+    // Không hiện admin
+    if (u.role === 'admin') return false;
+
+    if (!searchTerm) return true; // Không tìm thì hiện hết (trừ admin)
     const term = searchTerm.toLowerCase().trim();
 
     // Tìm trong Username, Email, hoặc UID
